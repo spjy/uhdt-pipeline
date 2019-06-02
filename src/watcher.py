@@ -3,12 +3,12 @@ import time
 import os
 from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler
-from simple_rest_client.api import API
 
 class Watcher:
   DIRECTORY_TO_WATCH = "C:\watcher_directory"
 
   def __init__(self):
+    print('Running watcher script')
     self.observer = Observer()
 
   def run(self):
@@ -35,7 +35,6 @@ class Handler(FileSystemEventHandler):
       # Take any action here when a file is first created.
       print("Received created event - %s." % event.src_path)
       filepath = event.src_path.split(os.sep)
-      sep = os.sep
       print(filepath[len(filepath) - 1])
 
       filename = filepath[len(filepath) - 1]

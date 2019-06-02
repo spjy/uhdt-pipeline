@@ -19,6 +19,20 @@ Duplicate (DO NOT RENAME) the `.env.example` file and rename it to `.env`. Adjus
 
 ## Running
 
+You should be in the virtualenv environment whenever you want to run any scripts internally in the project.
+
 ```bash
 $ .venv\Scripts\activiate # Start virtualenv environment
+```
+
+To run the watcher script (for new files)
+
+```bash
+$ py .\src\watcher.py
+```
+
+To run the pipeline script:
+
+```bash
+$ py .\src\Pipeline.py
 ```

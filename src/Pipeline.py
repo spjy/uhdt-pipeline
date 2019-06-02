@@ -22,25 +22,36 @@ class Pipeline:
       'alphanumeric_color': ''
     }
 
-  def write_object(key, value):
-    object[key] = value
+  def write_object(self, key, value):
+    self.object[key] = value
 
   def run_alphanumeric(self):
     print(f'{self.image_name}: running alphanumeric script')
+
+    # Run alphanumeric script
     result = alphanumeric_recognition(os.path.join(self.image_path, self.image_name))
-    self.object['alphanumeric'] = result
+
+    # Save result
+    self.write_object('alphanumeric', result)
+
     print(f'{self.image_name}: detected alphanumeric "{result}"')
 
   def run_color(self):
-    result = color_recognition(os.path.join(self.image_path, self.image_name))
     print(f'{self.image_name}: running color script')
-    self.object['background_color'] = result.shape_color
-    self.object['alphanumeric_color'] = result.alphanumeric_color
-    print(f'{self.image_name}: detected shape_color {result.shape_color}')
-    print(f'{self.image_name}: detected alphanumeric_color {result.alphanumeric_color}')
+
+    # Run color script on specific image
+    result = color_recognition(os.path.join(self.image_path, self.image_name))
+
+    # Save result
+    self.write_object('background_color', result["shape_color"])
+    self.write_object('alphanumeric_color', result["alphanumeric_color"])
+
+    print(f'{self.image_name}: detected shape_color {result["shape_color"]}')
+    print(f'{self.image_name}: detected alphanumeric_color {result["alphanumeric_color"]}')
 
   def write_json(self):
     print(f'{self.image_name}: writing JSON file')
+
     name = self.image_name.split('.')[0]
     output = json.dumps(self.object)
 

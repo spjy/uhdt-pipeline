@@ -86,6 +86,9 @@ class Pipeline:
     os.rename(os.path.join(self.image_path, self.image_name), os.path.join(output_dir, self.image_name))
 
 def main():
+  if not os.path.isdir(os.getenv("OUTPUT_DIR")):
+    os.makedirs(os.getenv("OUTPUT_DIR"))
+
   # Get values from shape recognition script
   parser = argparse.ArgumentParser()
   parser.add_argument("--object", help="object")
@@ -97,7 +100,7 @@ def main():
   pipeline = Pipeline(args.image, args.path, args.object)
 
   # Run alphanumeric
-  pipeline.run_alphanumeric() # store alpha
+  pipeline.run_alphanumeric() # store alpha 
 
   # run color
   pipeline.run_color() # store color

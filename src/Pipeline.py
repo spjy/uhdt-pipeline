@@ -1,8 +1,8 @@
 import sys
-sys.path.insert(0, '../detection_scripts') # Add detection_scripts to python path
+sys.path.insert(0, './detection_scripts') # Add detection_scripts to python path
 
-import label_image as alphanumeric_recognition
-import openCVcolor1 as color_recognition
+from label_image import main as alphanumeric_recognition
+from openCVcolor1 import main as color_recognition
 import json
 import argparse
 import os
@@ -24,7 +24,7 @@ class Pipeline:
       'latitude': '',
       'longitude': '',
       'orientation': '',
-      'shape': metadata,
+      'shape': object,
       'background_color': '',
       'alphanumeric': '',
       'alphanumeric_color': ''
@@ -78,12 +78,12 @@ class Pipeline:
 
     output_dir = os.getenv("OUTPUT_DIR")
     name = self.image_name.split('.')[0]
-    output = json.dumps(self.object)
+    output = json.dumps(self.metadata)
 
     with open(f'{os.path.join(output_dir, name)}.json', 'w') as file:
       file.write(output)
 
-    os.system(f'mv {os.path.join(self.image_path, self.image_name)} {output_dir}')
+    os.rename(os.path.join(self.image_path, self.image_name), output_dir)
 
 def main():
   # Get values from shape recognition script

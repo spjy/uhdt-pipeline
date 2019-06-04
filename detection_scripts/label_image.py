@@ -70,8 +70,8 @@ def load_labels(label_file):
   return label
 
 def main(file_name):
-  model_file = f"{os.getcwd()}{os.sep}alphanumeric{os.sep}deps{os.sep}retrained_graph.pb"
-  label_file = f"{os.getcwd()}{os.sep}alphanumeric{os.sep}deps{os.sep}retrained_labels.txt"
+  model_file = os.path.join('.', 'deps', 'retrained_graph.pb')
+  label_file = os.path.join('.', 'deps', 'retrained_labels.txt')
 
   image = Image.open(file_name)
 

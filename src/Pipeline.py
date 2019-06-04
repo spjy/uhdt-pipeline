@@ -83,7 +83,7 @@ class Pipeline:
     with open(f'{os.path.join(output_dir, name)}.json', 'w') as file:
       file.write(output)
 
-    os.rename(os.path.join(self.image_path, self.image_name), output_dir)
+    os.rename(os.path.join(self.image_path, self.image_name), os.path.join(output_dir, self.image_name))
 
 def main():
   # Get values from shape recognition script
